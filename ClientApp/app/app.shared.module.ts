@@ -9,8 +9,10 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import {CompanyNameComponent} from './components/company-name/company-name.component';
+import { CompanyNameComponent } from './components/company-name/company-name.component';
+
 import { CompanyNameService} from './services/company-name.service'
+import { CustomersService } from './services/customers.service'
 
 @NgModule({
     declarations: [
@@ -21,7 +23,7 @@ import { CompanyNameService} from './services/company-name.service'
         FetchDataComponent,
         HomeComponent
     ],
-    providers: [CompanyNameService],
+    providers: [CompanyNameService, CustomersService],
     imports: [
         CommonModule,
         HttpModule,
