@@ -9,8 +9,11 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import {CompanyNameComponent} from './components/company-name/company-name.component';
+import { CompanyNameComponent } from './components/company-name/company-name.component';
+
 import { CompanyNameService} from './services/company-name.service'
+import { CustomersService } from './services/customers.service'
+import { CustomersListComponent } from './components/customers-list/customers-list.component';
 
 @NgModule({
     declarations: [
@@ -19,9 +22,10 @@ import { CompanyNameService} from './services/company-name.service'
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        CustomersListComponent
     ],
-    providers: [CompanyNameService],
+    providers: [CompanyNameService, CustomersService],
     imports: [
         CommonModule,
         HttpModule,
@@ -30,6 +34,7 @@ import { CompanyNameService} from './services/company-name.service'
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
+            { path: 'customers', component: CustomersListComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
