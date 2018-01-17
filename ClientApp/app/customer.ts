@@ -1,5 +1,5 @@
 export interface Customer {
-    Id: number;
+    Id?: number;
     Name: string;
     AccountBalance: number;
 }

@@ -20,6 +20,18 @@ namespace vanilla_angular.Controllers
         {
             return new JsonResult(CUSTOMER_LIST);
         }
+
+        [HttpPost]
+        public IActionResult SaveCustomer([FromBody] PostCustomer customer)
+        {
+            if(customer == null || customer.Name == null) {
+                return new BadRequestResult();
+            }
+
+            Customer created = new Customer(CUSTOMER_LIST.Count, customer.Name, customer.AccountBalance);
+            CUSTOMER_LIST.Add(created);
+            return new OkResult();
+        }
     }
 
     public class Customer
@@ -35,4 +47,9 @@ namespace vanilla_angular.Controllers
         }
     }
 
+    public class PostCustomer
+    {
+        public string Name { get; set; }
+        public decimal AccountBalance { get; set; }
+    }
 }

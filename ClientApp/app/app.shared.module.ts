@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -10,10 +10,11 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { CompanyNameComponent } from './components/company-name/company-name.component';
+import { CustomersListComponent } from './components/customers-list/customers-list.component';
+import { CustomerAddComponent } from './components/customer-add/customer-add.component';
 
 import { CompanyNameService} from './services/company-name.service'
 import { CustomersService } from './services/customers.service'
-import { CustomersListComponent } from './components/customers-list/customers-list.component';
 
 @NgModule({
     declarations: [
@@ -23,18 +24,24 @@ import { CustomersListComponent } from './components/customers-list/customers-li
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        CustomersListComponent
+        CustomersListComponent,
+        CustomerAddComponent
     ],
     providers: [CompanyNameService, CustomersService],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
-            { path: 'customers', component: CustomersListComponent },
+            { path: 'customers', 
+                children:[
+                    { path:'',  component: CustomersListComponent },
+                    { path: 'add', component: CustomerAddComponent },
+                ]},
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
