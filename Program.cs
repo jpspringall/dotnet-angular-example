@@ -19,6 +19,7 @@ namespace usm_angular
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseEnvironment(EnvironmentName.Development)
                 .UseStartup<Startup>()
                 .Build();
     }
