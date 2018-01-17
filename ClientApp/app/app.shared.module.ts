@@ -13,6 +13,7 @@ import { CompanyNameComponent } from './components/company-name/company-name.com
 
 import { CompanyNameService} from './services/company-name.service'
 import { CustomersService } from './services/customers.service'
+import { CustomersListComponent } from './components/customers-list/customers-list.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CustomersService } from './services/customers.service'
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        CustomersListComponent
     ],
     providers: [CompanyNameService, CustomersService],
     imports: [
@@ -32,6 +34,7 @@ import { CustomersService } from './services/customers.service'
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
+            { path: 'customers', component: CustomersListComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
