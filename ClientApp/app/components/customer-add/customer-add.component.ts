@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from '../../services/customers.service';
 import { Validators, AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angular/forms';
+import { Customer } from '../../customer';
 @Component({
     selector: 'customer-add',
     templateUrl: 'customer-add.component.html'
@@ -20,6 +21,15 @@ export class CustomerAddComponent implements OnInit {
     }
 
     public handleSubmit(){
-        console.log(this.customerForm.valid);
+        if(this.customerForm.valid){
+            this.service.addCustomer$(this.customer);
+        }
+    }
+
+    get customer(): Customer{
+        return {
+            Name: this.nameControl.value,
+            AccountBalance: this.balanceControl.value
+        };
     }
 }

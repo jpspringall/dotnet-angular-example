@@ -14,4 +14,8 @@ export class CustomersService {
         return this.http.get('/api/Customer')
             .map((response: Response) => response.json())
     }
+
+    public addCustomer$(customer: Customer) : Observable<Response>{
+        return this.http.post('/api/Customer', customer)
+    }
 }
