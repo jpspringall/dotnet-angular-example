@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import {CompanyNameComponent} from './components/company-name/company-name.component';
+import { CompanyNameService} from './services/company-name.service'
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -19,6 +21,7 @@ import {CompanyNameComponent} from './components/company-name/company-name.compo
         FetchDataComponent,
         HomeComponent
     ],
+    providers: [CompanyNameService],
     imports: [
         CommonModule,
         HttpModule,
