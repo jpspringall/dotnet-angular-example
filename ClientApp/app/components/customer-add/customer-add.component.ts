@@ -4,6 +4,8 @@ import { Validators, AbstractControl, ValidationErrors, FormGroup, FormControl }
 import { CustomerModel as Customer } from '../../store/models/customer.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppModel} from '../../store/models/app.model';
 @Component({
     selector: 'customer-add',
     templateUrl: 'customer-add.component.html'
@@ -13,7 +15,7 @@ export class CustomerAddComponent implements OnInit {
     public customerForm: FormGroup;
     public nameControl: FormControl;
     public balanceControl: FormControl;
-    constructor(private service: CustomersService, private router: Router) { }
+    constructor(private service: CustomersService, private router: Router, private store: Store<AppModel>) { }
 
     ngOnInit() { 
         this.nameControl  = new FormControl('12312312', [ Validators.required]);
