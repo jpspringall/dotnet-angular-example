@@ -8,6 +8,6 @@ import 'rxjs/add/operator/catch';
 export class CompanyNameService {
     constructor(private http: Http) { }
     public getCompanyName$(): Observable<Response>{
-        return this.http.get('/api/Company/CompanyName')
+        return this.http.get('http://localhost:5000/api/Company/CompanyName')
     } 
 }

@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 
 import { CompanyNameService } from '../../services/company-name.service';
 import { AppModel } from '../models/app.model';
-import { GET_COMPANY_NAME } from '../actions/company.actions';
+import { GET_COMPANY_NAME, SetCompanyName } from '../actions/company.actions';
 export interface DefaultAction {
   type: string;
   payload: any;
@@ -22,14 +22,12 @@ export class CompanyEffects {
    *
    * @type {"Observable".Observable<R>}
    */
-  @Effect({dispatch:false})
+  @Effect()
   public getCompanyName$ = this.actions$
     .ofType<any>(GET_COMPANY_NAME)
     .mergeMap(() => {
       return this.service.getCompanyName$()
-        .map((value) => {
-            console.error(value.json());
-        } )
+        .map((value) =>  new SetCompanyName(value.json()) )
     });
 
   constructor(private actions$: Actions, private service: CompanyNameService, private state$: Store<AppModel>) {}
