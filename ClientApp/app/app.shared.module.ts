@@ -16,6 +16,12 @@ import { CustomerAddComponent } from './components/customer-add/customer-add.com
 import { CompanyNameService} from './services/company-name.service'
 import { CustomersService } from './services/customers.service'
 
+// NGRX
+import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -29,6 +35,7 @@ import { CustomersService } from './services/customers.service'
     ],
     providers: [CompanyNameService, CustomersService],
     imports: [
+        StoreModule.forRoot({}),
         CommonModule,
         HttpModule,
         FormsModule,
@@ -44,7 +51,10 @@ import { CustomersService } from './services/customers.service'
                 ]},
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
-        ])
+        ]),
+        StoreRouterConnectingModule,
+        StoreDevtoolsModule.instrument(),
+        EffectsModule.forRoot([])
     ]
 })
 export class AppModuleShared {
