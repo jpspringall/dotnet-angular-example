@@ -26,6 +26,9 @@ import { CustomersService } from './services/customers.service';
 
 import {appReducers} from './store/reducers/app.reducer';
 import {metaReducers} from './store/reducers/meta.reducer';
+
+import {CompanyEffects} from './store/effects/company.effects';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -58,7 +61,7 @@ import {metaReducers} from './store/reducers/meta.reducer';
         ]),
         StoreRouterConnectingModule,
         StoreDevtoolsModule.instrument(),
-        EffectsModule.forRoot([])
+        EffectsModule.forRoot([CompanyEffects])
     ]
 })
 export class AppModuleShared {
