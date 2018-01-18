@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {of} from 'rxjs/observable/of'
-import {Customer} from '../customer';
+import {CustomerModel as Customer} from '../store/models/customer.model';
 
 @Injectable()
 export class CustomersService {

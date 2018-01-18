@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomersService} from '../../services/customers.service';
 import { Observable } from 'rxjs/Observable';
-import { Customer } from '../../customer';
+import { CustomerModel as Customer } from '../../store/models/customer.model';
 
 @Component({
     selector: 'customers-list',
