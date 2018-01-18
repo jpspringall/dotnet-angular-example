@@ -25,7 +25,7 @@ import { CompanyNameService} from './services/company-name.service';
 import { CustomersService } from './services/customers.service';
 
 import {appReducers} from './store/reducers/app.reducer';
-
+import {metaReducers} from './store/reducers/meta.reducer';
 @NgModule({
     declarations: [
         AppComponent,
@@ -39,7 +39,7 @@ import {appReducers} from './store/reducers/app.reducer';
     ],
     providers: [CompanyNameService, CustomersService],
     imports: [
-        StoreModule.forRoot(appReducers),
+        StoreModule.forRoot(appReducers, {metaReducers}),
         CommonModule,
         HttpModule,
         FormsModule,
