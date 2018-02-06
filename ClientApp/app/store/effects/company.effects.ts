@@ -1,15 +1,15 @@
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/withLatestFrom';
-import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
-import { of } from 'rxjs/observable/of';
-import { Store } from '@ngrx/store';
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/mergeMap";
+import "rxjs/add/operator/withLatestFrom";
+import { Injectable } from "@angular/core";
+import { Effect, Actions } from "@ngrx/effects";
+import { of } from "rxjs/observable/of";
+import { Store } from "@ngrx/store";
 
-import { CompanyNameService } from '../../services/company-name.service';
-import { AppModel } from '../models/app.model';
-import { GET_COMPANY_NAME, SetCompanyName } from '../actions/company.actions';
+import { CompanyNameService } from "../../services/company-name.service";
+import { AppModel } from "../models/app.model";
+import { GET_COMPANY_NAME, SetCompanyName } from "../actions/company.actions";
 export interface DefaultAction {
   type: string;
   payload: any;
@@ -26,9 +26,14 @@ export class CompanyEffects {
   public getCompanyName$ = this.actions$
     .ofType<any>(GET_COMPANY_NAME)
     .mergeMap(() => {
-      return this.service.getCompanyName$()
-        .map((value) =>  new SetCompanyName(value.json()) )
+      return this.service
+        .getCompanyName$()
+        .map(value => new SetCompanyName(value.json()));
     });
 
-  constructor(private actions$: Actions, private service: CompanyNameService, private state$: Store<AppModel>) {}
+  constructor(
+    private actions$: Actions,
+    private service: CompanyNameService,
+    private state$: Store<AppModel>
+  ) {}
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace vanilla_angular.Controllers
@@ -22,34 +23,69 @@ namespace vanilla_angular.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveCustomer([FromBody] PostCustomer customer)
+        [HttpPut]
+        public IActionResult SaveCustomer([FromBody] Customer customer)
         {
-            if(customer == null || customer.Name == null) {
+            if (customer == null || customer.Name == null)
+            {
                 return new BadRequestResult();
             }
 
-            Customer created = new Customer(CUSTOMER_LIST.Count, customer.Name, customer.AccountBalance);
-            CUSTOMER_LIST.Add(created);
+            if (customer.Id.HasValue)
+            {
+                var item = CUSTOMER_LIST.FirstOrDefault(f => f.Id.Value == customer.Id.Value);
+                var index = CUSTOMER_LIST.IndexOf(item);
+                if (index < 0)
+                {
+                    return new BadRequestResult();
+                }
+                else
+                {
+                    CUSTOMER_LIST[index] = customer;
+                }
+            }
+            else
+            {
+                Customer created = new Customer(CUSTOMER_LIST.Count, customer.Name, customer.AccountBalance);
+                CUSTOMER_LIST.Add(created);
+            }
+            return new OkResult();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCustomer(int? id)
+        {
+            if (id.HasValue)
+            {
+                var item = CUSTOMER_LIST.First(f => f.Id.Value == id.Value);
+                var index = CUSTOMER_LIST.IndexOf(item);
+                if (index < 0)
+                {
+                    return new BadRequestResult();
+                }
+                else
+                {
+                    CUSTOMER_LIST.RemoveAt(index);
+                }
+            }
+            else
+            {
+                return new BadRequestResult();
+            }
             return new OkResult();
         }
     }
 
     public class Customer
     {
-        public int Id { get; }
+        public int? Id { get; }
         public string Name { get; }
         public decimal AccountBalance { get; }
-        public Customer(int id, string name, decimal accountBalance)
+        public Customer(int? id, string name, decimal accountBalance)
         {
             this.Id = id;
             this.Name = name;
             this.AccountBalance = accountBalance;
         }
-    }
-
-    public class PostCustomer
-    {
-        public string Name { get; set; }
-        public decimal AccountBalance { get; set; }
     }
 }
