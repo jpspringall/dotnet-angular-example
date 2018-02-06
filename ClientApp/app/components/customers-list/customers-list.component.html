@@ -8,6 +8,8 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Balance</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +19,11 @@
                     <td>{{customer.accountBalance}} </td>
                     <td>
                         <a class="btn btn-primary" [routerLink]="['/customers/edit', customer.id]" role="button">Edit Customer</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning" (click)="onDelete(customer.id)">
+                            Delete Customer
+                        </button>
                     </td>
                 </tr>
             </tbody>

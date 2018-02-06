@@ -6,7 +6,10 @@ import { Store } from "@ngrx/store";
 
 import { AppModel } from "../../store/models/app.model";
 import { selectCustomers } from "../../store/selectors/customers.selector";
-import { GetCustomers } from "../../store/actions/customers.actions";
+import {
+  GetCustomers,
+  DeleteCustomer
+} from "../../store/actions/customers.actions";
 
 @Component({
   selector: "customers-list",
@@ -20,5 +23,12 @@ export class CustomersListComponent implements OnInit {
 
   ngOnInit() {
     this.customers$ = this.store.select(selectCustomers);
+  }
+
+  onDelete(event: string) {
+    const remove = window.confirm("Are you sure, you want to delete customer?");
+    if (remove) {
+      this.store.dispatch(new DeleteCustomer({ id: event, redirect: false }));
+    }
   }
 }

@@ -10,12 +10,15 @@ import { Router } from "@angular/router";
 
 import { CustomersService } from "../../services/customers.service";
 import { AppModel } from "../models/app.model";
+
 import {
   GET_CUSTOMERS,
   ADD_CUSTOMER,
   EDIT_CUSTOMER,
   DELETE_CUSTOMER,
-  SetCustomers
+  SetCustomers,
+  DeleteCustomer,
+  GetCustomers
 } from "../actions/customers.actions";
 
 export interface DefaultAction {
@@ -65,11 +68,15 @@ export class CustomerEffects {
   @Effect({ dispatch: false })
   public deleteCustomer$ = this.actions$
     .ofType<any>(DELETE_CUSTOMER)
-    .mergeMap(action => {
+    .mergeMap((action: DeleteCustomer) => {
       console.log(action);
-      this.service.deleteCustomer$(action.payload).subscribe(response => {
+      this.service.deleteCustomer$(action.payload.id).subscribe(response => {
         if (response.status === 200) {
-          return this.router.navigate(["/customers"]);
+          if (action.payload.redirect) {
+            return this.router.navigate(["/customers"]);
+          } else {
+            return this.state$.dispatch(new GetCustomers());
+          }
         }
         console.error("There was an error");
       });

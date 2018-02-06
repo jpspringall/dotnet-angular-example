@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { CustomerModel } from "../models/customer.model";
+import { CustomerDeleteModel } from "../models/customer.delete.model";
 
 export const GET_CUSTOMERS = "[CUSTOMERS] Get customers";
 export const SET_CUSTOMERS = "[CUSTOMERS] Set customers";
@@ -16,21 +17,26 @@ export class GetCustomers implements Action {
 export class SetCustomers implements Action {
   public readonly type = SET_CUSTOMERS;
 
-  constructor(private payload: CustomerModel[]) {}
+  constructor(public payload: CustomerModel[]) {}
 }
 export class AddCustomer implements Action {
   public readonly type = ADD_CUSTOMER;
-  constructor(private payload: CustomerModel) {}
+  constructor(public payload: CustomerModel) {}
 }
 
 export class EditCustomer implements Action {
   public readonly type = EDIT_CUSTOMER;
-  constructor(private payload: CustomerModel) {}
+  constructor(public payload: CustomerModel) {}
 }
 
 export class DeleteCustomer implements Action {
   public readonly type = DELETE_CUSTOMER;
-  constructor(private payload: number) {}
+  constructor(public payload: CustomerDeleteModel) {}
 }
 
-export type Actions = GetCustomers | AddCustomer | EditCustomer | SetCustomers;
+export type Actions =
+  | GetCustomers
+  | AddCustomer
+  | EditCustomer
+  | DeleteCustomer
+  | SetCustomers;

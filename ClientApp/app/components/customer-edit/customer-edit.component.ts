@@ -11,6 +11,7 @@ import { Store } from "@ngrx/store";
 
 import { CustomersService } from "../../services/customers.service";
 import { CustomerModel as Customer } from "../../store/models/customer.model";
+import { CustomerDeleteModel as CustomerDelete } from "../../store/models/customer.delete.model";
 import { AppModel } from "../../store/models/app.model";
 import {
   EditCustomer,
@@ -81,7 +82,9 @@ export class CustomerEditComponent implements OnInit {
   onDelete() {
     const remove = window.confirm("Are you sure, you want to delete customer?");
     if (remove) {
-      this.store.dispatch(new DeleteCustomer(this.idControl.value));
+      this.store.dispatch(
+        new DeleteCustomer({ id: this.idControl.value, redirect: true })
+      );
     }
   }
 }
