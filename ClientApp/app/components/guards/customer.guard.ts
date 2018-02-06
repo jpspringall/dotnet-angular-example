@@ -26,8 +26,6 @@ export class CustomerGuard implements CanActivate {
     return this.store
       .select(selectCustomers)
       .do(data => {
-        console.log("testing", data);
-        console.log("length", data.length);
         if (!data.length) {
           this.store.dispatch(new GetCustomers());
         }

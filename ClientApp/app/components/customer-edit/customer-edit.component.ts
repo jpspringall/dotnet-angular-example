@@ -79,7 +79,6 @@ export class CustomerEditComponent implements OnInit {
   }
 
   onDelete() {
-    console.log(event);
     const remove = window.confirm("Are you sure, you want to delete customer?");
     if (remove) {
       this.store.dispatch(new DeleteCustomer(this.idControl.value));
